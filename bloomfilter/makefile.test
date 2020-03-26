@@ -1,0 +1,21 @@
+all: bloomfilter
+
+CC=g++ -g
+INC=-I.
+LIB=
+
+bloomfilter: test.o Bloom.o test.o md5.o
+	$(CC) $(INC) $(LIB) -o bloomfilter test.o Bloom.o md5.o
+
+test.o: test.cc
+	$(CC) -c $(INC) test.cc -o test.o
+
+md5.o: md5.cc md5.h
+	$(CC) -c $(INC) md5.cc -o md5.o
+
+Bloom.o: Bloom.cc Bloom.h
+	$(CC) -c $(INC) Bloom.cc -o Bloom.o
+
+clean:
+	rm -f *~ *.o a.out cscop* core.*
+
